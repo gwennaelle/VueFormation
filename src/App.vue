@@ -1,28 +1,33 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header/>
+    <MoviesGrid/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue'
+import MoviesGrid from './components/MoviesGrid.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Header,
+    MoviesGrid
   }
 }
 </script>
 
 <style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import '~normalize.css';
+@import './assets/styles/variables.less';
+
+  #app {
+    background: @dark-grey;
+    font-family: Tahoma;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
 </style>

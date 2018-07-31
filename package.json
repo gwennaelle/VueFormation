@@ -11,6 +11,7 @@
     "vue": "^2.5.16"
   },
   "devDependencies": {
+    "normalize.css": "^8.0.0",
     "@vue/cli-plugin-babel": "^3.0.0-rc.9",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.9",
     "@vue/cli-service": "^3.0.0-rc.9",

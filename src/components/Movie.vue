@@ -1,21 +1,28 @@
 <template>
     <figure>
-        <img :src="getImgUrl(movie)" :alt="movie.movieTag" @click="detailMovie(movie)"/>
+        <img :src="getImgUrl(movie)" :alt="movie.movieTag" @click="selectMovie()"/>
         <figcaption>{{ movie.title }}</figcaption>
     </figure>
 </template>
 <script>
+import { moviesState } from '../states/movies-state'
+
 export default {
   name: 'Movie',
   props: {
     movie: Object
   },
+  data () {
+    return {
+      moviesState
+    }
+  },
   methods: {
     getImgUrl (movie) {
       return `/img/${movie.movieTag}.jpg`
     },
-    detailMovie() {
-      this.$emit('detailMovie', this.movie)
+    selectMovie () {
+      this.moviesState.selectedMovie = this.movie
     }
   }
 }

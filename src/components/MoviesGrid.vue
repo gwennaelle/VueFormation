@@ -1,20 +1,18 @@
 <template>
     <main>
         <Movie
-          v-for="(movie, index) in movies"
+          v-for="(movie, index) in moviesState.movies"
           :key="index"
-          :movie="movie"
-          @detailMovie="selectMovie"/>
+          :movie="movie"/>
         <MovieDetails
-          v-if="selectedMovie"
-          :movie="selectedMovie"
-          @closeMe="closePopup"/>
+          v-if="moviesState.selectedMovie"/>
     </main>
 </template>
 
 <script>
 import Movie from './Movie.vue'
 import MovieDetails from './MovieDetails.vue'
+import { moviesState } from '../states/movies-state'
 
 export default {
   name: 'MoviesGrid',
@@ -24,24 +22,16 @@ export default {
   },
   data () {
     return {
-      movies: null,
-      selectedMovie: null
+      moviesState
     }
   },
   async created () {
     try {
-      let response = await fetch('data/movies.json')
-      this.movies = await response.json()
+      const response = await fetch('data/movies.json')
+      const movies = await response.json()
+      this.moviesState.movies = movies
     } catch (error) {
       console.error(error)
-    }
-  },
-  methods: {
-    selectMovie (movie) {
-      this.selectedMovie = movie
-    },
-    closePopup () {
-      this.selectedMovie = null
     }
   }
 }

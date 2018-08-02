@@ -1,30 +1,32 @@
 <template>
   <div>
     <section>
-      <figcaption>{{ movie.title }}</figcaption>
+      <figcaption>{{ moviesState.selectedMovie.title }}</figcaption>
       <figure>
-          <img :src="getImgUrl(movie)" :alt="movie.movieTag"/>
-          <p>{{ movie.synopsis }}</p>
+          <img :src="getImgUrl(moviesState.selectedMovie)" :alt="moviesState.selectedMovie.movieTag"/>
+          <p>{{ moviesState.selectedMovie.synopsis }}</p>
       </figure>
-      <span @click="$emit('closeMe')">Close</span>
+      <span @click="closePopup()">Close</span>
     </section>
   </div>
 </template>
 
 <script>
+import { moviesState } from '../states/movies-state'
+
 export default {
   name: 'MovieDetails',
-  props: {
-    movie: Object
-  },
   data () {
     return {
-      selectedMovie: null
+      moviesState
     }
   },
   methods: {
     getImgUrl (movie) {
       return `/img/${movie.movieTag}.jpg`
+    },
+    closePopup () {
+      this.moviesState.selectedMovie = null
     }
   }
 }

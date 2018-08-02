@@ -7,7 +7,8 @@
           :selectMovie="selectMovie"/>
         <MovieDetails
           v-if="selectedMovie"
-          :movie="selectedMovie"/>
+          :movie="selectedMovie"
+          :close-popup="closePopup"/>
     </main>
 </template>
 
@@ -38,6 +39,9 @@ export default {
   methods: {
     selectMovie (movie) {
       this.selectedMovie = movie
+    },
+    closePopup () {
+      this.selectedMovie = null
     }
   }
 }

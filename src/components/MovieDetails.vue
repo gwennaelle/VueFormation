@@ -6,7 +6,7 @@
           <img :src="getImgUrl(movie)" :alt="movie.movieTag"/>
           <p>{{ movie.synopsis }}</p>
       </figure>
-      <span @click="selectMovie()">Close</span>
+      <span @click="closePopup()">Close</span>
     </section>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
   name: 'MovieDetails',
   props: {
     movie: Object,
-    selectMovie: Function
+    closePopup: Function
   },
   data () {
     return {

@@ -4,11 +4,11 @@
           v-for="(movie, index) in movies"
           :key="index"
           :movie="movie"
-          :selectMovie="selectMovie"/>
+          @detailMovie="selectMovie"/>
         <MovieDetails
           v-if="selectedMovie"
           :movie="selectedMovie"
-          :close-popup="closePopup"/>
+          @closeMe="closePopup"/>
     </main>
 </template>
 

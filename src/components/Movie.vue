@@ -1,6 +1,6 @@
 <template>
     <figure>
-        <img :src="getImgUrl(movie)" :alt="movie.movieTag" @click="selectMovie(movie)"/>
+        <img :src="getImgUrl(movie)" :alt="movie.movieTag" @click="detailMovie(movie)"/>
         <figcaption>{{ movie.title }}</figcaption>
     </figure>
 </template>
@@ -8,12 +8,14 @@
 export default {
   name: 'Movie',
   props: {
-    movie: Object,
-    selectMovie: Function
+    movie: Object
   },
   methods: {
     getImgUrl (movie) {
       return `/img/${movie.movieTag}.jpg`
+    },
+    detailMovie() {
+      this.$emit('detailMovie', this.movie)
     }
   }
 }

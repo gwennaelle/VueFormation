@@ -27,7 +27,7 @@ export default {
         this.$refs.header.unsetfocus()
         this.$refs.movieGrid.setfocus()
         console.log(this.$refs.movieGrid.isFocused)
-        if (this.$refs.movieGrid.isFocused){
+        if (this.$refs.movieGrid.isFocused) {
           this.$refs.movieGrid.unsetfocus()
           this.$refs.movieGrid.$refs.movie[0].setfocus()
         }

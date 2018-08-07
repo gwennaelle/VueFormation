@@ -1,6 +1,6 @@
 <template>
     <main v-bind:class="{ focus: isFocused }" >
-        <Movie 
+        <Movie
           ref="movie"
           v-for="(movie, index) in moviesState.movies"
           :key="index"
@@ -39,7 +39,7 @@ export default {
   },
   async created () {
     try {
-      const response = await fetch('data/movies.json')
+      const response = await fetch('http://localhost:5000/movies')
       const movies = await response.json()
       this.moviesState.movies = movies
     } catch (error) {

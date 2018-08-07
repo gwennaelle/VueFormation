@@ -27,7 +27,19 @@ export default {
     },
     closePopup () {
       this.moviesState.selectedMovie = null
+    },
+    escapeKeyListener (event) {
+      console.log(event.keyCode)
+      if (event.keyCode === 27) {
+        this.closePopup()
+      }
     }
+  },
+  created () {
+    document.addEventListener('keydown', this.escapeKeyListener)
+  },
+  beforeDestroy () {
+    document.removeEventListener('keydown', this.escapeKeyListener)
   }
 }
 </script>

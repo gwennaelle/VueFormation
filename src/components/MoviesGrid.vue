@@ -1,11 +1,14 @@
 <template>
-    <main>
-        <Movie
+    <main v-bind:class="{ focus: isFocused }" >
+        <Movie 
+          ref="movie"
           v-for="(movie, index) in moviesState.movies"
           :key="index"
-          :movie="movie"/>
+          :movie="movie"
+          />
         <MovieDetails
-          v-if="moviesState.selectedMovie"/>
+          v-if="moviesState.selectedMovie"
+          />
     </main>
 </template>
 
@@ -22,7 +25,16 @@ export default {
   },
   data () {
     return {
-      moviesState
+      moviesState,
+      isFocused: false
+    }
+  },
+  methods: {
+    setfocus () {
+      this.isFocused = true
+    },
+    unsetfocus () {
+      this.isFocused = false
     }
   },
   async created () {
@@ -47,5 +59,7 @@ main {
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-
+.focus {
+  background-color: chocolate;
+}
 </style>

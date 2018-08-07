@@ -1,5 +1,5 @@
 <template>
-    <figure>
+    <figure v-bind:class="{ focus: isFocused }">
         <img :src="getImgUrl(movie)" :alt="movie.movieTag" @click="selectMovie()"/>
         <figcaption>{{ movie.title }}</figcaption>
     </figure>
@@ -14,7 +14,8 @@ export default {
   },
   data () {
     return {
-      moviesState
+      moviesState,
+      isFocused: false
     }
   },
   methods: {
@@ -23,6 +24,12 @@ export default {
     },
     selectMovie () {
       this.moviesState.selectedMovie = this.movie
+    },
+    setfocus () {
+      this.isFocused = true
+    },
+    unsetfocus () {
+      this.isFocused = false
     }
   }
 }
@@ -56,5 +63,8 @@ figcaption {
   flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.focus{
+  background-color: chartreuse !important;
 }
 </style>

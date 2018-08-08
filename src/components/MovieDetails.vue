@@ -3,8 +3,8 @@
     <section>
       <figcaption>{{ moviesState.selectedMovie.title }}</figcaption>
       <figure>
-          <img :src="getImgUrl(moviesState.selectedMovie)" :alt="moviesState.selectedMovie.movieTag"/>
-          <p>{{ moviesState.selectedMovie.synopsis }}</p>
+          <img v-bind:class="{ loader: loading }" :src="getImgUrl(moviesState.selectedMovie)" :alt="movieData.movieTag"/>
+          <p>{{ movieData.synopsis }}</p>
       </figure>
       <span @click="closePopup()">Close</span>
     </section>
@@ -12,13 +12,19 @@
 </template>
 
 <script>
+import Loader from './Loader.vue'
 import { moviesState } from '../states/movies-state'
 
 export default {
   name: 'MovieDetails',
+  components: {
+    Loader
+  },
   data () {
     return {
-      moviesState
+      moviesState,
+      movieData: {},
+      loading: true
     }
   },
   methods: {
@@ -35,8 +41,17 @@ export default {
       }
     }
   },
-  created () {
+  async created () {
     document.addEventListener('keydown', this.escapeKeyListener)
+    try {
+      const id = this.moviesState.selectedMovie.id
+      const response = await fetch(`http://localhost:5000/movies/${id}`)
+      this.movieData = await response.json()
+    } catch (error) {
+      console.error(error)
+    } finally {
+      this.loading = false
+    }
   },
   beforeDestroy () {
     document.removeEventListener('keydown', this.escapeKeyListener)
@@ -101,5 +116,18 @@ span{
     width: 100%;
     text-align: center;
     font-size: 1.5em;
+}
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #2c3835; /* Blue */
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 </style>

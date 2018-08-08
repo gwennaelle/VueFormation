@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import Loader from './Loader.vue'
 import Movie from './Movie.vue'
 import MovieDetails from './MovieDetails.vue'
 import { moviesState } from '../states/movies-state'
@@ -21,7 +22,8 @@ export default {
   name: 'MoviesGrid',
   components: {
     Movie,
-    MovieDetails
+    MovieDetails,
+    Loader
   },
   data () {
     return {
@@ -39,7 +41,7 @@ export default {
   },
   async created () {
     try {
-      const response = await fetch('http://localhost:5000/movies')
+      const response = await fetch('http://localhost:5000/filteredMovies')
       const movies = await response.json()
       this.moviesState.movies = movies
     } catch (error) {

@@ -1,5 +1,6 @@
 <template>
- <section >
+  <div>
+    <section>
       <figcaption>{{ moviesState.selectedMovie.title }}</figcaption>
       <figure>
           <img v-bind:class="{ loader: loading }" :src="getImgUrl(moviesState.selectedMovie)" :alt="movieData.movieTag"/>
@@ -7,6 +8,7 @@
       </figure>
       <span @click="closePopup()">Close</span>
     </section>
+  </div>
 </template>
 
 <script>
@@ -83,20 +85,27 @@ figcaption {
   margin-right: 10px;
   font-size: 1.5em;
   white-space: nowrap;
+  flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+div{
+    position: fixed;
+    top :0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.8);
+}
 
 section{
-    position: relative;
-    top: 5%;
     margin: 7%;
+    width: 60%;
     background-color: #17181b;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    will-change: transform;
 }
+
 p{
     margin: 10px;
     font-size: 1.1em;

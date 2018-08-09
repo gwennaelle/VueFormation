@@ -1,12 +1,14 @@
-<template>
-    <main v-bind:class="{ focus: isFocused }" >
+<template >
+    <main  v-bind:class="{ animated: moviesState.selectedMovie }">
+        <div>
         <Movie
           ref="movie"
           v-for="(movie, index) in moviesState.movies"
           :key="index"
           :movie="movie"
           />
-        <MovieDetails
+        </div>
+        <MovieDetails class="half-size"
           v-if="moviesState.selectedMovie"
           />
     </main>
@@ -54,14 +56,26 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 main {
-  flex-grow: 1;
-  overflow: scroll;
   display: flex;
-  flex-direction: row;
+  width: 200%;
+
+}
+div{
+  display: inline-flex;
+  width: 100%;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  flex-grow: 1;
+  align-content: flex-start;
+}
+.half-size{
+  width: 100%;
 }
 .focus {
   background-color: chocolate;
+}
+.animated {
+    transform: translate3d(-48%, 000px, 0);
+    transition: transform 2s;
 }
 </style>

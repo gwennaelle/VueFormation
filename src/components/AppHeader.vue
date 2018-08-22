@@ -37,6 +37,6 @@ header {
   }
 }
 .focus{
-  background-color: aqua;
+  background-color: gray;
 }
 </style>

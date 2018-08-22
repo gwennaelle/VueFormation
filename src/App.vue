@@ -1,19 +1,17 @@
 <template>
   <div id="app">
     <AppHeader ref="header"/>
-    <MoviesGrid ref="movieGrid"/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import AppHeader from './components/AppHeader.vue'
-import MoviesGrid from './components/MoviesGrid.vue'
 
 export default {
   name: 'app',
   components: {
-    AppHeader,
-    MoviesGrid
+    AppHeader
   },
   data () {
     return {
@@ -52,5 +50,6 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow-x: hidden;
   }
 </style>

@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     getImgUrl (movie) {
-      return `/img/${movie.movieTag}.jpg`
+      return `http://localhost:5000/img/${movie.movieTag}.jpg`
     },
     closePopup () {
       this.moviesState.selectedMovie = null

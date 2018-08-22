@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     getImgUrl (movie) {
-      return `/img/${movie.movieTag}.jpg`
+      return `http://localhost:5000/img/${movie.movieTag}.jpg`
     },
     selectMovie () {
       this.moviesState.selectedMovie = this.movie
@@ -43,6 +43,7 @@ figure {
   width: 230px;
   font-size: 1em;
   font-weight: bold;
+  margin: 10px;
 }
 img {
   max-width: 100%;

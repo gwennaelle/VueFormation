@@ -7,6 +7,7 @@
           :key="index"
           :movie="movie"
           />
+        <router-link to="/form">Go to Form</router-link>
         </div>
         <MovieDetails class="half-size"
           v-if="moviesState.selectedMovie"
@@ -57,15 +58,14 @@ export default {
 <style scoped lang="less">
 main {
   display: flex;
-  width: 200%;
+  width: 200vw;
 
 }
 div{
-  display: inline-flex;
-  width: 100%;
-  flex-direction: column;
+  display: flex;
+  width: 100vw;
+  flex-direction: row;
   flex-wrap: wrap;
-  flex-grow: 1;
   align-content: flex-start;
 }
 .half-size{
@@ -73,6 +73,10 @@ div{
 }
 .focus {
   background-color: chocolate;
+}
+.link {
+  background-color: white;
+  height: 20px;
 }
 .animated {
     transform: translate3d(-48%, 000px, 0);

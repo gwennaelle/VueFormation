@@ -1,3 +1,3 @@
 export const myElement = {
-  isFocused : false
+  isFocused: false
 }

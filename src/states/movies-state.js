@@ -4,5 +4,5 @@ export const moviesState = {
 }
 
 export const focusedElement = {
-  isFocused : false
+  isFocused: false
 }

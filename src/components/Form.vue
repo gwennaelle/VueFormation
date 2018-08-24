@@ -6,6 +6,10 @@
   <label for="ftitle">Title: </label><input v-model="title" type="text" id="ftitle"><br/>
   <label for="ftag">Tag: </label><input v-model="tag" type="text" id="ftag"><br/>
   <label for="fsynopsis">Synopsis: </label><textarea v-model="synopsis" type="text" id="fsynopsis"></textarea><br/>
+  <div v-if="errorMsg != null">
+      <p v-for="(err, index) in errorMsg"
+          :key="index">{{ errorMsg[index] }}</p>
+  </div>
   <input type="submit" value="Submit">
     </form>
   </section>
@@ -18,23 +22,37 @@ export default {
     return {
       title: null,
       tag: null,
-      synopsis: null
+      synopsis: null,
+      errorMsg: null
     }
   },
   methods: {
-   async displayForm (event) {
-      await fetch('http://localhost:5000/form', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          title: this.title,
-          tag: this.tag,
-          synopsis: this.synopsis
+    async displayForm (event) {
+      try {
+        const response = await fetch('http://localhost:5000/form', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            title: this.title,
+            tag: this.tag,
+            synopsis: this.synopsis
+          })
         })
-      })
-      this.$router.push('/')
+        if (response.ok) {
+          this.$router.push('/')
+        } else {
+          if (response.status === 400) {
+            this.errorMsg = await response.json()
+            console.log('res', response.status, this.errorMsg)
+          } else {
+            this.errorMsg = ['Erreur innatendue']
+          }
+        }
+      } catch (error) {
+        this.errorMsg = ['Erreur innatendue']
+      }
     }
   }
 }
@@ -43,7 +61,6 @@ export default {
 <style scoped lang="less">
 section{
     position: relative;
-
     background-color: #17181b;
     border-radius: 10px;
     will-change: transform;
@@ -54,17 +71,38 @@ h2{
 form{
   display: flex;
   top: 5%;
-  margin: 7%;
-  width: 30%;
+  margin: 0% 25%;
   flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
+  font-size: 1.1em;
+}
+input, textarea {
+      border-radius: 4px;
+      border: 2px solid #fff;
+      padding: 10px;
+      &:focus {
+        border-color: lightblue;
+      }
+}
+label{
+  font-size: 1.1em;
 }
 .submit{
-  width: 10%;
+  width: 100%;
   align-content: center;
+  border-radius: 4px;
+  font-size: 1.1em;
 }
 button{
   margin: 20px;
+}
+div{
+  background-color: rgba(255, 0, 0, 0.815);
+  margin: 5px 0px 20px 0px;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 1.05em;
+
 }
 </style>

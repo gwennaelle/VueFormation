@@ -50,6 +50,23 @@ export default {
     } catch (error) {
       console.error(error)
     }
+  },
+  sockets:{
+    'insert-movie': function(movie){
+      this.moviesState.movies.push(movie)
+    },
+    'update-movie': function(movie){
+      const oldMovie = this.moviesState.movies.find(tabMovie => {
+        return tabMovie.id === movie.id
+    })
+      Object.assign(oldMovie, movie)
+    },
+    'delete-movie': function(movie){
+      const selectedMovie = this.moviesState.movies.find(tabMovie => {
+        return tabMovie.id === movie.id
+    })
+      this.moviesState.movies.splice(this.moviesState.movies.indexOf(selectedMovie), 1)
+    }
   }
 }
 </script>

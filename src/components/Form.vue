@@ -4,7 +4,7 @@
   <h2>Add a movie</h2>
     <form name="myForm" @submit.prevent="displayForm">
   <label for="ftitle">Title: </label><input v-model="title" type="text" id="ftitle"><br/>
-  <label for="ftag">Tag: </label><input v-model="tag" type="text" id="ftag"><br/>
+  <label for="ftag">Tag: </label><input v-model="movieTag" type="text" id="ftag"><br/>
   <label for="fsynopsis">Synopsis: </label><textarea v-model="synopsis" type="text" id="fsynopsis"></textarea><br/>
   <div v-if="errorMsg != null">
       <p v-for="(err, index) in errorMsg"
@@ -25,7 +25,7 @@ export default {
       moviesState,
       id: null,
       title: null,
-      tag: null,
+      movieTag: null,
       synopsis: null,
       errorMsg: null
     }
@@ -42,7 +42,7 @@ export default {
           body: JSON.stringify({
             id: this.id,
             title: this.title,
-            tag: this.tag,
+            movieTag: this.movieTag,
             synopsis: this.synopsis
           })
         })
@@ -59,15 +59,16 @@ export default {
       } catch (error) {
         this.errorMsg = ['Erreur innatendue']
       }
-    },
-    
+    }
   },
   created () {
-        this.id = moviesState.selectedMovie.id
-        this.title = moviesState.selectedMovie.title
-        this.tag = moviesState.selectedMovie.movieTag
-        this.synopsis = moviesState.selectedMovie.synopsis
+    if (moviesState.selectedMovie !== null) {
+      this.id = moviesState.selectedMovie.id
+      this.title = moviesState.selectedMovie.title
+      this.movieTag = moviesState.selectedMovie.movieTag
+      this.synopsis = moviesState.selectedMovie.synopsis
     }
+  }
 }
 </script>
 

@@ -69,7 +69,7 @@ div{
   align-content: flex-start;
 }
 .half-size{
-  width: 100%;
+  width: 100vw;
 }
 .focus {
   background-color: chocolate;

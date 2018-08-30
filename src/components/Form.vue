@@ -16,10 +16,14 @@
 </template>
 
 <script>
+import { moviesState } from '../states/movies-state'
+
 export default {
   name: 'Form',
   data () {
     return {
+      moviesState,
+      id: null,
       title: null,
       tag: null,
       synopsis: null,
@@ -28,6 +32,7 @@ export default {
   },
   methods: {
     async displayForm (event) {
+      console.log(moviesState)
       try {
         const response = await fetch('http://localhost:5000/form', {
           method: 'post',
@@ -35,6 +40,7 @@ export default {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
+            id: this.id,
             title: this.title,
             tag: this.tag,
             synopsis: this.synopsis
@@ -53,8 +59,15 @@ export default {
       } catch (error) {
         this.errorMsg = ['Erreur innatendue']
       }
+    },
+    
+  },
+  created () {
+        this.id = moviesState.selectedMovie.id
+        this.title = moviesState.selectedMovie.title
+        this.tag = moviesState.selectedMovie.movieTag
+        this.synopsis = moviesState.selectedMovie.synopsis
     }
-  }
 }
 </script>
 

@@ -57,15 +57,15 @@ export default {
     },
     'update-movie': function(movie){
       const oldMovie = this.moviesState.movies.find(tabMovie => {
-        return tabMovie.id === movie.id
+        return tabMovie._id === movie._id
     })
       Object.assign(oldMovie, movie)
     },
-    'delete-movie': function(movie){
+    'delete-movie': function(id){
       const selectedMovie = this.moviesState.movies.find(tabMovie => {
-        return tabMovie.id === movie.id
-    })
-      this.moviesState.movies.splice(this.moviesState.movies.indexOf(selectedMovie), 1)
+        return tabMovie._id == id
+      })
+      selectedMovie && this.moviesState.movies.splice(this.moviesState.movies.indexOf(selectedMovie), 1)
     }
   }
 }

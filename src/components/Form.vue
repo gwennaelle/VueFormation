@@ -40,7 +40,7 @@ export default {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            id: this.id,
+            id: this._id,
             title: this.title,
             movieTag: this.movieTag,
             synopsis: this.synopsis
@@ -63,7 +63,7 @@ export default {
   },
   created () {
     if (moviesState.selectedMovie !== null) {
-      this.id = moviesState.selectedMovie.id
+      this._id = moviesState.selectedMovie._id
       this.title = moviesState.selectedMovie.title
       this.movieTag = moviesState.selectedMovie.movieTag
       this.synopsis = moviesState.selectedMovie.synopsis

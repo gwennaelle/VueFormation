@@ -6,7 +6,7 @@
           <div class="metadata">
             <p>{{ moviesState.selectedMovie.synopsis }}</p>
             <span class="update" @click="updateMovie(moviesState.selectedMovie)">Update</span>
-            <span class="delete" @click="deleteMovie(moviesState.selectedMovie.id)">Delete</span>
+            <span class="delete" @click="deleteMovie(moviesState.selectedMovie._id)">Delete</span>
           </div>
       </figure>
       <span @click="closePopup()">Close</span>
@@ -39,19 +39,13 @@ export default {
     async deleteMovie (id) {
       this.loading = true
       try {
-        const response = await fetch(`http://localhost:5000/movies/${id}`, {
-          method: 'delete',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: {
-            id: this.moviesState.selectedMovie.id
-          }
+        const response = await fetch(`http://localhost:5000/movies/${this.moviesState.selectedMovie._id}`, {
+          method: 'delete'
         })
         if (response.ok) {
           this.loading = false
-          this.moviesState.selectedMovie = null
           this.moviesState.movies.splice(this.moviesState.movies.indexOf(this.moviesState.selectedMovie), 1)
+          this.moviesState.selectedMovie = null
         } else {
           if (response.status === 400) {
             this.errorMsg = await response.json()
@@ -78,7 +72,7 @@ export default {
     this.loading = true
     document.addEventListener('keydown', this.escapeKeyListener)
     try {
-      const id = this.moviesState.selectedMovie.id
+      const id = this.moviesState.selectedMovie._id
       const response = await fetch(`http://localhost:5000/movies/${id}`)
       this.moviesState.selectedMovie = await response.json()
     } catch (error) {

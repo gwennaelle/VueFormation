@@ -44,7 +44,7 @@ export default {
   async created () {
     document.addEventListener('keydown', this.escapeKeyListener)
     try {
-      const id = this.moviesState.selectedMovie.id
+      const id = this.moviesState.selectedMovie._id
       const response = await fetch(`http://localhost:5000/movies/${id}`)
       this.movieData = await response.json()
     } catch (error) {
